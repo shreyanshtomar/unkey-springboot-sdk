@@ -5,22 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
-import org.springframework.validation.annotation.Validated;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Validated
-public class KeyCreateRequest {
+public class KeyVerifyRequest {
     @NonNull
+    private String key;
     private String apiId;
-    private String prefix;
-    private String name;
-    private Integer byteLength;
-    private String ownerId;
-    private Meta meta;
-    private Integer expires;
-    private Integer remaining;
-    private KeyRateLimit ratelimit;
 }
