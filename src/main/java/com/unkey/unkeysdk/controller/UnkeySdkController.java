@@ -25,19 +25,20 @@ public class UnkeySdkController {
 
     @PostMapping("/verify")
     public KeyVerifyResponse verifyKey(
-            @RequestBody KeyVerifyRequest keyVerifyRequest,
-            @RequestHeader("Authorization") String authToken) {
+            @RequestBody KeyVerifyRequest keyVerifyRequest) {
         // Delegate the creation of the key to the KeyService
         return keyService.verifyKey(keyVerifyRequest);
     }
 
-//    @PutMapping("/update")
-//    public ResponseEntity<String> updateKey(
-//            @RequestBody Map<String, Object> keyUpdateRequest,
-//            @RequestHeader("Authorization") String authToken) {
-//        // Delegate the creation of the key to the KeyService
-//        return keyService.updateKey(keyUpdateRequest, authToken, "key_7zhetHwzMPa5c3Ceu9NHPt");
-//    }
+    @PutMapping("/update")
+    public ResponseEntity<String> updateKey(
+            @RequestParam String keyId,
+            @RequestBody Map<String, Object> keyUpdateRequest,
+            @RequestHeader("Authorization") String authToken
+    ) {
+        // Delegate the creation of the key to the KeyService
+        return keyService.updateKey(keyUpdateRequest, authToken, keyId);
+    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> updateKey(

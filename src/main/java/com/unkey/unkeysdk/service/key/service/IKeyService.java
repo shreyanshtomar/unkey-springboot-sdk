@@ -8,5 +8,6 @@ import java.util.Map;
 public interface IKeyService {
     KeyCreateResponse createKey(KeyCreateRequest keyCreateRequest, String authToken);
     KeyVerifyResponse verifyKey(KeyVerifyRequest keyVerifyRequest);
+    ResponseEntity<String> updateKey(Map<String, Object> fieldsToUpdate, String authToken, String keyId);
     ResponseEntity<String> deleteKey(String authToken, KeyDeleteRequest keyId);
 }
