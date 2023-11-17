@@ -1,14 +1,13 @@
 package com.unkey.unkeysdk.service.key.service;
 
 import com.unkey.unkeysdk.dto.*;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 import static com.unkey.unkeysdk.Constants.UNKEY_API_URL;
 
@@ -115,4 +114,58 @@ public class KeyService implements IKeyService{
         }
     }
 
+
+    @Override
+    public ResponseEntity<String> deleteKey(String authToken, KeyDeleteRequest keyId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(authToken);
+
+        String keyIdValue = keyId.getKeyId();
+        String url = UNKEY_API_URL + "/keys/" + keyIdValue;
+
+        try {
+            // Send the HTTP request
+            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+            RestTemplate restTemplate = new RestTemplate();
+
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.DELETE,
+                    requestEntity,
+                    String.class
+            );
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return ResponseEntity.ok("OK");
+            } else {
+                System.err.println("Error creating key. Status code: " + responseEntity.getStatusCodeValue());
+                System.err.println("Response body: " + responseEntity.getBody());
+                System.err.println("Request headers: " + headers);
+
+                // Throw a custom exception with more details
+                throw new RuntimeException("Error creating key. See logs for details.");
+            }
+        }
+        catch (HttpClientErrorException e) {
+            // Handle HTTP 4xx errors (client errors)
+            System.err.println("Client error: " + e.getRawStatusCode());
+            System.err.println("Response body: " + e.getResponseBodyAsString());
+            System.err.println("Request headers: " + headers);
+            e.printStackTrace();
+            throw e;
+        } catch (HttpServerErrorException e) {
+            // Handle HTTP 5xx errors (server errors)
+            System.err.println("Server error: " + e.getRawStatusCode());
+            System.err.println("Response body: " + e.getResponseBodyAsString());
+            System.err.println("Request headers: " + headers);
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            // Handle other exceptions
+            System.err.println("Error creating key: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }
