@@ -9,9 +9,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class KeyRateLimit {
-    private String type;
+public class KeyVerifyRateLimit {
     private Integer limit;
-    private Integer refillRate;
-    private Integer refillInterval;
+    private Integer remaining;
+    private Long reset;
 }
