@@ -1,6 +1,7 @@
 package com.unkey.unkeysdk.controller;
 
 import com.unkey.unkeysdk.dto.*;
+import com.unkey.unkeysdk.service.api.service.IAPIService;
 import com.unkey.unkeysdk.service.key.service.IKeyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import java.util.Map;
 @RequestMapping(value = "/v1/unkeysdk", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UnkeySdkController {
     private final IKeyService keyService;
+    private final IAPIService apiService;
 
     @PostMapping("/createKey")
     public KeyCreateResponse createKey(
@@ -46,5 +48,13 @@ public class UnkeySdkController {
             @RequestHeader("Authorization") String authToken) {
         // Delegate the creation of the key to the KeyService
         return keyService.deleteKey(authToken, keyId);
+    }
+
+    @GetMapping("/get-apis")
+    public GetAPIResponse getAPI(
+            @RequestParam String apiId,
+            @RequestHeader("Authorization") String authToken) {
+        // Delegate the creation of the key to the KeyService
+        return apiService.getAPI(apiId, authToken);
     }
 }

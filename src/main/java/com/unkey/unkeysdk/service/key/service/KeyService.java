@@ -42,12 +42,9 @@ public class KeyService implements IKeyService{
                 log.error("Error creating key. Status code: " + responseEntity.getStatusCodeValue());
                 log.error("Response body: " + responseEntity.getBody());
                 log.error("Request headers: " + headers);
-
-                // Throw a custom exception with more details
                 throw new RuntimeException("Error creating key. See logs for details.");
             }
         } catch (Exception e) {
-            // Handle other exceptions
             log.error("Error creating key: " + e.getMessage());
             e.printStackTrace();
             throw e;
