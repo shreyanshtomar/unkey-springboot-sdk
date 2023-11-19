@@ -7,12 +7,10 @@
 
 name: Gradle Package
 
-on:
-  release:
-    types: [created]
+on: push
 
 jobs:
-  build:
+  publish:
 
     runs-on: ubuntu-latest
     permissions:
@@ -25,21 +23,17 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
-        distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+        distribution: 'adopt'
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: build
 
-    # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
-    # the publishing section of your build.gradle
     - name: Publish to GitHub Packages
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: publish
       env:
         USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.TOKEN }}
+        TOKEN: ${{ secrets.UNKEY_SPRINGBOOT_SECRET }}
