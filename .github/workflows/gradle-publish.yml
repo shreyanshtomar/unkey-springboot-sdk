@@ -24,6 +24,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Install Gradle Wrapper
+        run: |
+            ./gradlew wrapper --gradle-version=8.4
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
@@ -32,7 +35,8 @@ jobs:
           arguments: build
 
       - name: Publish to GitHub Packages
-        run: ./gradlew publish
+        run: |
+          ./gradlew publish
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.UNKEY_SPRINGBOOT_SECRET }}
