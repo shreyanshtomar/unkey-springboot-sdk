@@ -57,4 +57,12 @@ public class UnkeySdkController {
         // Delegate the creation of the key to the KeyService
         return apiService.getAPI(apiId, authToken);
     }
+    @GetMapping("/keys")
+    public ListKeysResponse listKeys(
+            @RequestParam String apiId,
+            @RequestBody(required = false) ListKeysRequest listKeyRquest,
+            @RequestHeader("Authorization") String authToken) {
+        // Delegate the creation of the key to the KeyService
+        return apiService.listKeys(listKeyRquest, apiId, authToken);
+    }
 }

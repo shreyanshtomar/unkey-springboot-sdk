@@ -11,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Validated
 public class KeyCreateRequest {
     @NonNull
     private String apiId;
