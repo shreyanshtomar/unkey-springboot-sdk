@@ -36,4 +36,4 @@ jobs:
           ./gradlew publish
         env:
           USERNAME: ${{ github.actor }}
-          TOKEN: ${{ secrets.UNKEY_SPRINGBOOT_SECRET }}
+          TOKEN: ${{ secrets.unkey_springboot_secret }}
