@@ -23,7 +23,9 @@ publishing {
 			url = uri("https://maven.pkg.github.com/shreyanshtomar/unkey-springboot-sdk")
 			credentials {
 				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+				System.out.println("username: " + username);
 				password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+				System.out.println("password: " + password);
 			}
 		}
 	}
