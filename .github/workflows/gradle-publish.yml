@@ -35,7 +35,7 @@ jobs:
         run: |
           ./gradlew publish
           System.out.println("Publishing to GitHub Packages...")
-          System.out.println("secret: ${{ secrets.JAVATOKEN }}")
+          System.out.println("secretly : "ttt->"+${{ secrets.JAVATOKEN }}")
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.JAVATOKEN }}

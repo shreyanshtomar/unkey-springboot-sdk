@@ -25,7 +25,8 @@ publishing {
 				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
 				System.out.println("username: " + username);
 				password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
-				System.out.println("password: " + password);
+				System.out.println("gpr: " + project.findProperty("gpr.token"));
+				System.out.println("tokiin : " + System.getenv("GITHUB_TOKEN"));
 			}
 		}
 	}
