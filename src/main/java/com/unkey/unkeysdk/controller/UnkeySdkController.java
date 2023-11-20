@@ -10,6 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/*
+ * Sample Controller for the Unkey SDK
+ *
+ * This controller provides a reference implementation on how to use the Unkey SDK library.
+ * It includes endpoints for key creation, verification, update, deletion, and retrieval of APIs and keys.
+ * Developers can refer to this controller to understand how to interact with the Unkey SDK services.
+ *
+ * Note: Make sure to replace the sample implementations with your actual business logic and error handling.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/v1/unkeysdk", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
