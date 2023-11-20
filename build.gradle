@@ -1,5 +1,5 @@
 plugins {
-	id 'java'
+	id 'java-library'
 	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'maven-publish'
@@ -20,13 +20,10 @@ publishing {
 	repositories {
 		maven {
 			name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/shreyanshtomar/unkey-springboot-sdk")
+			url = uri("https://maven.pkg.github.com/shreyanshtomar/my-registry")
 			credentials {
-				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-				System.out.println("username: " + username);
-				password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
-				System.out.println("gpr: " + project.findProperty("gpr.token"));
-				System.out.println("tokiin : " + System.getenv("GITHUB_TOKEN"));
+				username = project.findProperty("user") ?: System.getenv("GITHUB_ACTOR")
+				password = project.findProperty("token") ?: System.getenv("GITHUB_TOKEN")
 			}
 		}
 	}
