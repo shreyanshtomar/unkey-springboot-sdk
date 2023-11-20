@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.validation.annotation.Validated;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class KeyRateLimit {
-    private String type;
-    private Integer limit;
-    private Integer refillRate;
-    private Integer refillInterval;
+public class KeyDeleteRequest {
+    private String keyId;
 }
